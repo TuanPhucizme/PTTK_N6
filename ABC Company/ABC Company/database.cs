@@ -132,16 +132,41 @@ namespace WinFormsApp1
             }
         }
 
-        public void registerDangTuyen(string MaCTDT, string MaHS, string MaUV)
+        public string getApllierName(string MaUV)
         {
             try
             {
-                string sql1 = @"INSERT DanhSachDangKyUngTuyen (MaDangTuyen, MaUngVien) VALUES (@MaDT, @MaUV)";
-                string sql2 = @"SELECT MaDangTuyen";
-                string sql3 = @"INSERT DanhSachDangKyUngTuyen (MaDangTuyen, MaUngVien) VALUES (@MaDT, @MaUV)";
+                sql = @"SELECT HoTen FROM UngVien WHERE MaUngVien = @UV";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
+                    cmd.Parameters.AddWithValue("@UV", MaUV);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return reader.GetString(0);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed to get data " + ex.Message);
+            }
+
+            return null;
+        }
+
+        public void registerDangTuyen(string MaCTDT, string MaUV)
+        {
+            try
+            {
+                sql = @"INSERT DanhSachDangKyUngTuyen (MaChiTietDangTuyen, MaUngVien) VALUES (@MaCTDT, @MaUV)";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@MaCTDT", MaCTDT);
                     cmd.Parameters.AddWithValue("@MaUV", MaUV);
                     cmd.ExecuteNonQuery();
                 }

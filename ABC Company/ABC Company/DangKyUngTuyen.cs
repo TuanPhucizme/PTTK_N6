@@ -19,7 +19,7 @@ namespace ABC_Company
 
         public DangKyUngTuyen(string maCTDT)
         {
-            this.MaCTDT = MaCTDT;
+            this.MaCTDT = maCTDT;
             InitializeComponent();
 
             paperSuggestions = new AutoCompleteStringCollection();
@@ -36,6 +36,8 @@ namespace ABC_Company
 
         private void DangKyUngTuyen_Load(object sender, EventArgs e)
         {
+            detail.Text = MaCTDT;
+
             paperSuggestions.Clear();
             var db = new database();
             List<string> paperSuggestionsList = db.paperSuggestion();
@@ -63,7 +65,18 @@ namespace ABC_Company
 
         private void register_Click(object sender, EventArgs e)
         {
+            var db = new database();
+            if (db.applyCheck(applier.Text, paper.Text))
+            {
+                db.registerDangTuyen(MaCTDT, applier.Text);
+            }
+            this.Close();
+        }
 
+        private void applier_TextChanged(object sender, EventArgs e)
+        {
+            var db = new database().getApllierName(applier.Text);
+            name.Text = db;
         }
     }
 }

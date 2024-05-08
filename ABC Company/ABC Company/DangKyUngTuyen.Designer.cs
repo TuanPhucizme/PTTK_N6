@@ -36,6 +36,8 @@
             detail = new TextBox();
             paper = new TextBox();
             applier = new TextBox();
+            name = new TextBox();
+            applierName = new Label();
             SuspendLayout();
             // 
             // label1
@@ -89,6 +91,7 @@
             // 
             detail.Location = new Point(416, 83);
             detail.Name = "detail";
+            detail.ReadOnly = true;
             detail.Size = new Size(125, 27);
             detail.TabIndex = 5;
             // 
@@ -105,12 +108,32 @@
             applier.Name = "applier";
             applier.Size = new Size(125, 27);
             applier.TabIndex = 7;
+            applier.TextChanged += applier_TextChanged;
+            // 
+            // name
+            // 
+            name.Location = new Point(416, 209);
+            name.Name = "name";
+            name.ReadOnly = true;
+            name.Size = new Size(201, 27);
+            name.TabIndex = 8;
+            // 
+            // applierName
+            // 
+            applierName.AutoSize = true;
+            applierName.Location = new Point(223, 216);
+            applierName.Name = "applierName";
+            applierName.Size = new Size(92, 20);
+            applierName.TabIndex = 9;
+            applierName.Text = "Ten ung vien";
             // 
             // DangKyUngTuyen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(applierName);
+            Controls.Add(name);
             Controls.Add(applier);
             Controls.Add(paper);
             Controls.Add(detail);
@@ -136,5 +159,7 @@
         private TextBox detail;
         private TextBox paper;
         private TextBox applier;
+        private TextBox name;
+        private Label applierName;
     }
 }
