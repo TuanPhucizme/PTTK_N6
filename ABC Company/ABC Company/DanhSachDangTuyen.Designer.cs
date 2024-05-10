@@ -75,6 +75,7 @@ namespace WinFormsApp1
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             DVData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            DVData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DVData.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             DVData.BackgroundColor = SystemColors.ControlDarkDark;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;

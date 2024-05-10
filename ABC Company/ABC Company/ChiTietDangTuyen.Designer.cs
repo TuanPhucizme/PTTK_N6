@@ -32,7 +32,6 @@
             label2 = new Label();
             label3 = new Label();
             position = new TextBox();
-            number = new TextBox();
             description = new RichTextBox();
             update = new Button();
             register = new Button();
@@ -40,8 +39,9 @@
             cancel = new Button();
             label5 = new Label();
             company = new TextBox();
-            UploadDate = new TextBox();
             delete = new Button();
+            number = new TextBox();
+            UploadDate = new TextBox();
             SuspendLayout();
             // 
             // label1
@@ -77,13 +77,6 @@
             position.Name = "position";
             position.Size = new Size(125, 27);
             position.TabIndex = 9;
-            // 
-            // number
-            // 
-            number.Location = new Point(184, 81);
-            number.Name = "number";
-            number.Size = new Size(125, 27);
-            number.TabIndex = 10;
             // 
             // description
             // 
@@ -148,13 +141,6 @@
             company.Size = new Size(125, 27);
             company.TabIndex = 23;
             // 
-            // UploadDate
-            // 
-            UploadDate.Location = new Point(184, 124);
-            UploadDate.Name = "UploadDate";
-            UploadDate.Size = new Size(125, 27);
-            UploadDate.TabIndex = 24;
-            // 
             // delete
             // 
             delete.Location = new Point(477, 370);
@@ -165,13 +151,29 @@
             delete.UseVisualStyleBackColor = true;
             delete.Click += delete_Click;
             // 
+            // number
+            // 
+            number.Location = new Point(184, 81);
+            number.Name = "number";
+            number.Size = new Size(125, 27);
+            number.TabIndex = 30;
+            number.KeyPress += number_KeyPress;
+            // 
+            // UploadDate
+            // 
+            UploadDate.Location = new Point(184, 124);
+            UploadDate.Name = "UploadDate";
+            UploadDate.Size = new Size(125, 27);
+            UploadDate.TabIndex = 31;
+            // 
             // ChiTietDangTuyen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(delete);
             Controls.Add(UploadDate);
+            Controls.Add(number);
+            Controls.Add(delete);
             Controls.Add(company);
             Controls.Add(label5);
             Controls.Add(cancel);
@@ -179,7 +181,6 @@
             Controls.Add(register);
             Controls.Add(update);
             Controls.Add(description);
-            Controls.Add(number);
             Controls.Add(position);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -197,7 +198,6 @@
         private Label label2;
         private Label label3;
         private TextBox position;
-        private TextBox number;
         private RichTextBox description;
         private Button update;
         private Button register;
@@ -205,7 +205,8 @@
         private Button cancel;
         private Label label5;
         private TextBox company;
-        private TextBox UploadDate;
         private Button delete;
+        private TextBox number;
+        private TextBox UploadDate;
     }
 }

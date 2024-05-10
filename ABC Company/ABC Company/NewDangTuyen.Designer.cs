@@ -73,6 +73,7 @@
             cancel.TabIndex = 37;
             cancel.Text = "Huy";
             cancel.UseVisualStyleBackColor = true;
+            cancel.Click += cancel_Click;
             // 
             // label4
             // 
@@ -107,6 +108,7 @@
             number.Name = "number";
             number.Size = new Size(125, 27);
             number.TabIndex = 32;
+            number.KeyPress += number_KeyPress;
             // 
             // position
             // 

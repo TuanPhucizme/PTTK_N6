@@ -47,5 +47,18 @@ namespace ABC_Company
             new database().createDangTuyen(dateTimeValue, position.Text, int.Parse(number.Text), description.Text, companyCode.Text);
             this.Close();
         }
+
+        private void cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void number_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

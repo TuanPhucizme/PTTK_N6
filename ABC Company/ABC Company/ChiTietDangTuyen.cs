@@ -56,5 +56,13 @@ namespace WinFormsApp1
             new DangKyUngTuyen(detail).ShowDialog();
             this.Close();
         }
+
+        private void number_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
