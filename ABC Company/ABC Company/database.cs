@@ -12,7 +12,7 @@ namespace WinFormsApp1
     public class database
     {
         // modified 'Data Source' to match your local database instance, Initial Catalog is the name of your database
-        private string connstr = @"Data Source=localhost\HOANG_VV;Initial Catalog=PROJECTADIS;Integrated Security=True";
+        private string connstr = @"Data Source=DESKTOP-JT70F25;Initial Catalog=PROJECTADIS;Integrated Security=True;Password = 123@abc";
         private SqlConnection conn;
         private string sql;
         private DataTable dt;
