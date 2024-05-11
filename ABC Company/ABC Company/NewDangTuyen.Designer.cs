@@ -30,7 +30,6 @@
         {
             companyCode = new TextBox();
             label6 = new Label();
-            UploadDate = new TextBox();
             cancel = new Button();
             label4 = new Label();
             add = new Button();
@@ -40,6 +39,7 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
+            UploadDate = new DateTimePicker();
             SuspendLayout();
             // 
             // companyCode
@@ -57,13 +57,6 @@
             label6.Size = new Size(83, 20);
             label6.TabIndex = 41;
             label6.Text = "Ma cong ty";
-            // 
-            // UploadDate
-            // 
-            UploadDate.Location = new Point(205, 129);
-            UploadDate.Name = "UploadDate";
-            UploadDate.Size = new Size(125, 27);
-            UploadDate.TabIndex = 40;
             // 
             // cancel
             // 
@@ -144,14 +137,22 @@
             label1.TabIndex = 28;
             label1.Text = "Vi tri";
             // 
+            // UploadDate
+            // 
+            UploadDate.Format = DateTimePickerFormat.Short;
+            UploadDate.Location = new Point(205, 129);
+            UploadDate.Name = "UploadDate";
+            UploadDate.Size = new Size(121, 27);
+            UploadDate.TabIndex = 5;
+            // 
             // NewDangTuyen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(UploadDate);
             Controls.Add(companyCode);
             Controls.Add(label6);
-            Controls.Add(UploadDate);
             Controls.Add(cancel);
             Controls.Add(label4);
             Controls.Add(add);
@@ -172,7 +173,6 @@
 
         private TextBox companyCode;
         private Label label6;
-        private TextBox UploadDate;
         private Button cancel;
         private Label label4;
         private Button add;
@@ -182,5 +182,6 @@
         private Label label3;
         private Label label2;
         private Label label1;
+        private DateTimePicker UploadDate;
     }
 }

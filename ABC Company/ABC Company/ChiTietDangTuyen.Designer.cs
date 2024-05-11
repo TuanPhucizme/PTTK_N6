@@ -41,7 +41,7 @@
             company = new TextBox();
             delete = new Button();
             number = new TextBox();
-            UploadDate = new TextBox();
+            UploadDate = new DateTimePicker();
             SuspendLayout();
             // 
             // label1
@@ -161,10 +161,11 @@
             // 
             // UploadDate
             // 
+            UploadDate.Format = DateTimePickerFormat.Short;
             UploadDate.Location = new Point(184, 124);
             UploadDate.Name = "UploadDate";
-            UploadDate.Size = new Size(125, 27);
-            UploadDate.TabIndex = 31;
+            UploadDate.Size = new Size(117, 27);
+            UploadDate.TabIndex = 5;
             // 
             // ChiTietDangTuyen
             // 
@@ -207,6 +208,6 @@
         private TextBox company;
         private Button delete;
         private TextBox number;
-        private TextBox UploadDate;
+        private DateTimePicker UploadDate;
     }
 }

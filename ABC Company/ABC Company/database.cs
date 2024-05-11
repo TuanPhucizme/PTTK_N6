@@ -12,7 +12,7 @@ namespace WinFormsApp1
     public class database
     {
         // modified 'Data Source' to match your local database instance, Initial Catalog is the name of your database
-        private string connstr = @"Data Source=DESKTOP-JT70F25;Initial Catalog=PROJECTADIS;Integrated Security=True;Password = 123@abc";
+        private string connstr = @"Data Source=localhost\HOANG_VV;Initial Catalog=PROJECTADIS;Integrated Security=True";
         private SqlConnection conn;
         private string sql;
         private DataTable dt;
@@ -31,7 +31,7 @@ namespace WinFormsApp1
             }
         }
 	
-	public DataTable DoanhNghiep()
+	    public DataTable DoanhNghiep()
         {
             try
             {
@@ -649,9 +649,16 @@ namespace WinFormsApp1
         {
             try
             {
-                sql = @"DELETE FROM ChiTietDangTuyen WHERE MaChiTietDangTuyen = @MaCTDT";
+                string sql1 = @"DELETE FROM DanhSachDangKyUngTuyen WHERE MaChiTietDangTuyen = @MaCTDT";
+                string sql2 = @"DELETE FROM ChiTietDangTuyen WHERE MaChiTietDangTuyen = @MaCTDT";
 
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (SqlCommand cmd = new SqlCommand(sql1, conn))
+                {
+                    cmd.Parameters.AddWithValue("@MaCTDT", MaCTDT);
+                    cmd.ExecuteNonQuery();
+                }
+
+                using (SqlCommand cmd = new SqlCommand(sql2, conn))
                 {
                     cmd.Parameters.AddWithValue("@MaCTDT", MaCTDT);
                     cmd.ExecuteNonQuery();

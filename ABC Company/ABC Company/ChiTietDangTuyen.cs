@@ -46,8 +46,7 @@ namespace WinFormsApp1
         private void update_Click(object sender, EventArgs e)
         {
             var ChiTiet = new database().chiTietDangTuyen(detail);
-            DateTime dateTimeValue = Convert.ToDateTime(ChiTiet["ThoiGianDangTuyen"]);
-            new database().updateDangTuyen(ChiTiet["MaDangTuyen"].ToString(), ChiTiet["MaChiTietDangTuyen"].ToString(), dateTimeValue, position.Text, int.Parse(number.Text), description.Text);
+            new database().updateDangTuyen(ChiTiet["MaDangTuyen"].ToString(), ChiTiet["MaChiTietDangTuyen"].ToString(), UploadDate.Value, position.Text, int.Parse(number.Text), description.Text);
             this.Close();
         }
 
