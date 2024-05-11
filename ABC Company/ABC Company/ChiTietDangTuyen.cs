@@ -13,19 +13,22 @@ namespace WinFormsApp1
 {
     public partial class ChiTietDangTuyen : Form
     {
-        public ChiTietDangTuyen(string detail)
+        public ChiTietDangTuyen(string detail, int left)
         {
             this.detail = detail;
+            this.left = left;
             InitializeComponent();
         }
 
         private string detail;
+        private int left;
 
         private void ChiTietDangTuyen_Load(object sender, EventArgs e)
         {
             var ChiTiet = new database().chiTietDangTuyen(detail);
             position.Text = ChiTiet["ViTri"].ToString();
             number.Text = ChiTiet["SoLuong"].ToString();
+            type.Text = ChiTiet["HinhThucDangTuyen"].ToString();
             DateTime dateTimeValue = Convert.ToDateTime(ChiTiet["ThoiGianDangTuyen"]);
             UploadDate.Text = dateTimeValue.ToShortDateString();
             description.Text = ChiTiet["MoTa"].ToString();
@@ -46,14 +49,22 @@ namespace WinFormsApp1
         private void update_Click(object sender, EventArgs e)
         {
             var ChiTiet = new database().chiTietDangTuyen(detail);
-            new database().updateDangTuyen(ChiTiet["MaDangTuyen"].ToString(), ChiTiet["MaChiTietDangTuyen"].ToString(), UploadDate.Value, position.Text, int.Parse(number.Text), description.Text);
+            new database().updateDangTuyen(ChiTiet["MaDangTuyen"].ToString(), ChiTiet["MaChiTietDangTuyen"].ToString(), UploadDate.Value, position.Text, int.Parse(number.Text), description.Text, type.Text);
             this.Close();
         }
 
         private void register_Click(object sender, EventArgs e)
         {
-            new DangKyUngTuyen(detail).ShowDialog();
-            this.Close();
+            if (left == 0)
+            {
+                MessageBox.Show("Đã hết số lượng đăng kí cho vị trí này");
+
+            }
+            else
+            {
+                new DangKyUngTuyen(detail).ShowDialog();
+                this.Close();
+            }
         }
 
         private void number_KeyPress(object sender, KeyPressEventArgs e)

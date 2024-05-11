@@ -69,8 +69,8 @@ namespace ABC_Company
             if (string.IsNullOrEmpty(txtTinhTrangNop.Text))
             {
                 // Nếu trống, chuyển hướng sang trang mới ViTriUngTuyen
-                ViTriUngTuyen viTriUngTuyenForm = new ViTriUngTuyen();
-                viTriUngTuyenForm.Show();
+                new ViTriUngTuyen().ShowDialog();
+               
                 //this.Hide(); // Ẩn form ChiTietUngVien
             }
             else

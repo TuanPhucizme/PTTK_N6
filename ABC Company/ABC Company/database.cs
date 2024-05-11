@@ -186,7 +186,34 @@ namespace WinFormsApp1
                 }
             }
 
-	    public bool AddNewCandidate(string hoTen, string diaChi, string email, DateTime ngaySinh, string cccd, string maUngVien)
+        public DataTable searchUngVien(string search)
+        {
+            try
+            {
+                sql = @"SELECT UV.MaUngVien AS 'Mã ứng viên', 
+                           UV.HoTen AS 'Họ tên', 
+                           UV.DiaChi AS 'Địa chỉ', 
+                           UV.Email AS 'Email', 
+                           DSTC.LoaiChungTu AS 'Bằng cấp', 
+                           CASE WHEN DSTC.TinhTrangNop = 1 THEN 'da nop' ELSE NULL END AS 'tình trạng nộp'
+                    FROM UngVien UV
+                    LEFT JOIN DanhSachChungTu DSTC ON UV.MaUngVien = DSTC.MaUngVien
+                    WHERE Hoten LIKE '%' + @search + '%' OR DiaChi LIKE '%' + @search + '%' OR Email LIKE '%' + @search + '%' OR LoaiChungTu LIKE '%' + @search + '%'";
+                
+                cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@search", search);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed to load data " + ex.Message);
+                return null;
+            }
+        }
+
+        public bool AddNewCandidate(string hoTen, string diaChi, string email, DateTime ngaySinh, string cccd, string maUngVien)
             {
                 try
                 {
@@ -338,14 +365,41 @@ namespace WinFormsApp1
             }
         }
 
+        public DataTable SoLuongUngTuyen()
+        {
+            try
+            {
+                sql = @"SELECT COUNT(t2.MaChiTietDangTuyen) AS SoLuongUngTuyen
+                        FROM ChiTietDangTuyen t1
+                        LEFT JOIN DanhSachDangKyUngTuyen t2 ON t1.MaChiTietDangTuyen = t2.MaChiTietDangTuyen
+                        GROUP BY t1.MaChiTietDangTuyen";
+                cmd = new SqlCommand(sql, conn);
+                dt = new DataTable();
+                dt.Load(cmd.ExecuteReader());
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed to load data " + ex.Message);
+                return null;
+            }
+        }
 
         public DataTable ListDangTuyen()
         {
             try
             {
-                sql = @"SELECT cdt.MaChiTietDangTuyen, cdt.ViTri, cdt.SoLuong, dst.ThoiGianDangTuyen, c.TenCongTy FROM ChiTietDangTuyen cdt 
-                       INNER JOIN DanhSachDangTuyen dst ON cdt.MaDangTuyen = dst.MaDangTuyen 
-                       INNER JOIN CongTy c ON dst.CongTyDangTuyen = c.MaCongTy";
+                sql = @"SELECT cdt.MaChiTietDangTuyen, cdt.ViTri, dst.HinhThucDangTuyen, cdt.SoLuong - ISNULL(SoLuongUngTuyen, 0) AS SoLuongConLai, dst.ThoiGianDangTuyen, c.TenCongTy 
+                        FROM ChiTietDangTuyen cdt 
+                        INNER JOIN DanhSachDangTuyen dst ON cdt.MaDangTuyen = dst.MaDangTuyen 
+                        INNER JOIN CongTy c ON dst.CongTyDangTuyen = c.MaCongTy
+                        LEFT JOIN (
+                            SELECT t1.MaChiTietDangTuyen, COUNT(t2.MaChiTietDangTuyen) AS SoLuongUngTuyen
+                            FROM ChiTietDangTuyen t1
+                            LEFT JOIN DanhSachDangKyUngTuyen t2 ON t1.MaChiTietDangTuyen = t2.MaChiTietDangTuyen
+                            GROUP BY t1.MaChiTietDangTuyen
+                        ) AS UngTuyen ON cdt.MaChiTietDangTuyen = UngTuyen.MaChiTietDangTuyen";
+
                 cmd = new SqlCommand(sql, conn);
                 dt = new DataTable();
                 dt.Load(cmd.ExecuteReader());
@@ -384,7 +438,7 @@ namespace WinFormsApp1
         {
             try
             {
-                sql = @"SELECT cdt.MaChiTietDangTuyen, cdt.MaDangTuyen ,dst.ThoiGianDangTuyen, dst.HinhThucDangTuyen, cdt.ViTri, cdt.SoLuong, cdt.MoTa, c.TenCongTy 
+                sql = @"SELECT cdt.MaChiTietDangTuyen, dst.HinhThucDangTuyen, cdt.MaDangTuyen ,dst.ThoiGianDangTuyen, dst.HinhThucDangTuyen, cdt.ViTri, cdt.SoLuong, cdt.MoTa, c.TenCongTy 
                         FROM ChiTietDangTuyen cdt
                         INNER JOIN DanhSachDangTuyen dst ON cdt.MaDangTuyen = dst.MaDangTuyen
                         INNER JOIN CongTy c ON dst.CongTyDangTuyen = c.MaCongTy
@@ -405,12 +459,13 @@ namespace WinFormsApp1
             }
         }
 
-        public void updateDangTuyen(string MaDT, string MaCTDT, DateTime newThoiGianDangTuyen, string newViTri, int newSoLuong, string newMoTa)
+        public void updateDangTuyen(string MaDT, string MaCTDT, DateTime newThoiGianDangTuyen, string newViTri, int newSoLuong, string newMoTa, string newType)
         {
             try
             {
                 string sql1 = @"UPDATE DanhSachDangTuyen
-                                SET ThoiGianDangTuyen = @newThoiGianDangTuyen
+                                SET ThoiGianDangTuyen = @newThoiGianDangTuyen,
+                                    HinhThucDangTuyen = @newType
                                 WHERE MaDangTuyen = @MaDT";
 
                 string sql2 = @"UPDATE ChiTietDangTuyen
@@ -422,6 +477,7 @@ namespace WinFormsApp1
                 using (SqlCommand cmd = new SqlCommand(sql1, conn))
                 {
                     cmd.Parameters.AddWithValue("@MaDT", MaDT);
+                    cmd.Parameters.AddWithValue("@newType", newType);
                     cmd.Parameters.AddWithValue("@newThoiGianDangTuyen", newThoiGianDangTuyen);
                     cmd.ExecuteNonQuery();
                 }

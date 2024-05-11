@@ -13,11 +13,6 @@ namespace ABC_Company
 {
     public partial class UngVien : Form
     {
-
-        
-
-
-
         public UngVien()
         {
             InitializeComponent();
@@ -38,7 +33,7 @@ namespace ABC_Company
 
         private void dgvDt_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
 
             if (e.RowIndex >= 0)
             {
@@ -66,7 +61,7 @@ namespace ABC_Company
             // Hiển thị form DangKyUngVien
             dangKyForm.ShowDialog();
 
-
+            UngVien_Load(this, EventArgs.Empty);
         }
 
         // Phương thức cập nhật cột "Vị trí"
@@ -89,8 +84,14 @@ namespace ABC_Company
             dgvDt.DataSource = db.UngVien(); // Cập nhật lại dataGridView với dữ liệu mới từ cơ sở dữ liệu
         }
 
-        
-
-        
+        private void btnTimkiem_Click(object sender, EventArgs e)
+        {
+            var db = new database();
+            dgvDt.DataSource = db.searchUngVien(txtTukhoa.Text);
+            DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
+            column.HeaderText = "Vị trí";
+            column.Name = "Vị trí"; // Đặt tên cho cột
+            dgvDt.Columns.Add(column);
+        }
     }
 }

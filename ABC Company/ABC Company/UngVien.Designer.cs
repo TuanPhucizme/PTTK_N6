@@ -44,54 +44,61 @@
             dgvDt.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvDt.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDt.Dock = DockStyle.Bottom;
-            dgvDt.Location = new Point(0, 146);
+            dgvDt.Location = new Point(0, 117);
+            dgvDt.Margin = new Padding(2, 2, 2, 2);
             dgvDt.Name = "dgvDt";
             dgvDt.ReadOnly = true;
             dgvDt.RowHeadersWidth = 62;
             dgvDt.RowTemplate.Height = 33;
-            dgvDt.Size = new Size(1122, 304);
+            dgvDt.Size = new Size(898, 243);
             dgvDt.TabIndex = 0;
             dgvDt.CellDoubleClick += dgvDt_CellDoubleClick;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(136, 56);
+            label1.Location = new Point(109, 45);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(76, 25);
+            label1.Size = new Size(62, 20);
             label1.TabIndex = 1;
             label1.Text = "Từ khóa";
             // 
             // txtTukhoa
             // 
-            txtTukhoa.Location = new Point(218, 56);
+            txtTukhoa.Location = new Point(174, 45);
+            txtTukhoa.Margin = new Padding(2, 2, 2, 2);
             txtTukhoa.Name = "txtTukhoa";
-            txtTukhoa.Size = new Size(283, 31);
+            txtTukhoa.Size = new Size(227, 27);
             txtTukhoa.TabIndex = 2;
             // 
             // btnTimkiem
             // 
-            btnTimkiem.Location = new Point(520, 56);
+            btnTimkiem.Location = new Point(416, 45);
+            btnTimkiem.Margin = new Padding(2, 2, 2, 2);
             btnTimkiem.Name = "btnTimkiem";
-            btnTimkiem.Size = new Size(112, 34);
+            btnTimkiem.Size = new Size(90, 27);
             btnTimkiem.TabIndex = 3;
             btnTimkiem.Text = "Tìm kiếm";
             btnTimkiem.UseVisualStyleBackColor = true;
+            btnTimkiem.Click += btnTimkiem_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(666, 59);
+            label2.Location = new Point(533, 47);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(152, 25);
+            label2.Size = new Size(124, 20);
             label2.TabIndex = 4;
             label2.Text = "Đăng ký ứng viên";
             // 
             // btnDangky
             // 
-            btnDangky.Location = new Point(824, 54);
+            btnDangky.Location = new Point(659, 43);
+            btnDangky.Margin = new Padding(2, 2, 2, 2);
             btnDangky.Name = "btnDangky";
-            btnDangky.Size = new Size(112, 34);
+            btnDangky.Size = new Size(90, 27);
             btnDangky.TabIndex = 5;
             btnDangky.Text = "Đăng ký";
             btnDangky.UseVisualStyleBackColor = true;
@@ -99,15 +106,16 @@
             // 
             // UngVien
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1122, 450);
+            ClientSize = new Size(898, 360);
             Controls.Add(btnDangky);
             Controls.Add(label2);
             Controls.Add(btnTimkiem);
             Controls.Add(txtTukhoa);
             Controls.Add(label1);
             Controls.Add(dgvDt);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "UngVien";
             Text = "Danh sách ứng viên";
             Load += UngVien_Load;

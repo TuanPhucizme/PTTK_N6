@@ -42,6 +42,8 @@
             delete = new Button();
             number = new TextBox();
             UploadDate = new DateTimePicker();
+            label6 = new Label();
+            type = new TextBox();
             SuspendLayout();
             // 
             // label1
@@ -167,11 +169,29 @@
             UploadDate.Size = new Size(117, 27);
             UploadDate.TabIndex = 5;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(477, 88);
+            label6.Name = "label6";
+            label6.Size = new Size(72, 20);
+            label6.TabIndex = 31;
+            label6.Text = "Hinh thuc";
+            // 
+            // type
+            // 
+            type.Location = new Point(577, 84);
+            type.Name = "type";
+            type.Size = new Size(125, 27);
+            type.TabIndex = 32;
+            // 
             // ChiTietDangTuyen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(type);
+            Controls.Add(label6);
             Controls.Add(UploadDate);
             Controls.Add(number);
             Controls.Add(delete);
@@ -209,5 +229,7 @@
         private Button delete;
         private TextBox number;
         private DateTimePicker UploadDate;
+        private Label label6;
+        private TextBox type;
     }
 }
