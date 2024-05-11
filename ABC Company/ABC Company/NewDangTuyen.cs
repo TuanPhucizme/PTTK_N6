@@ -44,7 +44,7 @@ namespace ABC_Company
         private void add_Click(object sender, EventArgs e)
         {
             DateTime dateTimeValue = Convert.ToDateTime(UploadDate.Text);
-            new database().createDangTuyen(dateTimeValue, position.Text, int.Parse(number.Text), description.Text, companyCode.Text);
+            new database().createDangTuyen(dateTimeValue, position.Text, int.Parse(number.Text), description.Text, companyCode.Text, type.Text, employ.Text);
             this.Close();
         }
 

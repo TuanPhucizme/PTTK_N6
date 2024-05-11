@@ -645,15 +645,20 @@ namespace WinFormsApp1
             return false; // Return false if no matching record or exception occurs
         }
 
-        public void createDangTuyen(DateTime newThoiGianDangTuyen, string newViTri, int newSoLuong, string newMoTa, string companyId)
+        public void createDangTuyen(DateTime newThoiGianDangTuyen, string newViTri, int newSoLuong, string newMoTa, string companyId, string type, string employ)
         {
             try
             {
                 string maChiTietDangTuyen = null;
                 string maDangTuyen = null;
+                string maDangTuyen2 = null;
                 string sql1 = @"INSERT ChiTietDangTuyen (MaChiTietDangTuyen, MaDangTuyen, ViTri, SoLuong, MoTa) VALUES (@MaCTDT, @MaDT, @Vitri, @Soluong, @Mota)";
                 string sql2 = @"SELECT TOP 1 MaChiTietDangTuyen FROM ChiTietDangTuyen ORDER BY MaChiTietDangTuyen DESC";
                 string sql3 = @"SELECT MaDangTuyen FROM DanhSachDangTuyen WHERE CongTyDangTuyen = @companyId";
+                string sql4 = @"INSERT DanhSachDangTuyen (MaDangTuyen, ThoiGianDangTuyen, HinhThucDangTuyen, NhanVienLapPhieu, CongTyDangTuyen) VALUES (@MaDT, @ThoiGian, @type, @employ, @company)";
+                string sql5 = @"SELECT TOP 1 MaDangTuyen FROM DanhSachDangTuyen ORDER BY MaDangTuyen DESC";
+
+                
 
                 using (SqlCommand cmd = new SqlCommand(sql2, conn))
                 {
@@ -662,6 +667,18 @@ namespace WinFormsApp1
                         if (reader.Read())
                         {
                             maChiTietDangTuyen = reader["MaChiTietDangTuyen"].ToString();
+                        }
+                    }
+                }
+
+                using (SqlCommand cmd = new SqlCommand(sql5, conn))
+                {
+                    cmd.Parameters.AddWithValue("@companyId", companyId);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            maDangTuyen2 = reader["MaDangTuyen"].ToString();
                         }
                     }
                 }
@@ -678,22 +695,56 @@ namespace WinFormsApp1
                     }
                 }
 
-                string prefix = maChiTietDangTuyen.Substring(0, 4);
-                string numberPart = maChiTietDangTuyen.Substring(4);
-                int number = int.Parse(numberPart) + 1;
-                numberPart = number.ToString().PadLeft(numberPart.Length, '0');
+                string prefix1 = maChiTietDangTuyen.Substring(0, 4);
+                string numberPart1 = maChiTietDangTuyen.Substring(4);
+                int number1 = int.Parse(numberPart1) + 1;
+                numberPart1 = number1.ToString().PadLeft(numberPart1.Length, '0');
 
-                maChiTietDangTuyen = prefix + numberPart;
+                string prefix2 = maDangTuyen2.Substring(0, 2);
+                string numberPart2 = maDangTuyen2.Substring(2);
+                int number2 = int.Parse(numberPart1) + 1;
+                numberPart2 = number2.ToString().PadLeft(numberPart1.Length, '0');
 
-                using (SqlCommand cmd = new SqlCommand(sql1, conn))
+                maDangTuyen2 = prefix2 + numberPart2;
+                maChiTietDangTuyen = prefix1 + numberPart1;
+
+                if (maDangTuyen == null || maDangTuyen == string.Empty)
                 {
-                    cmd.Parameters.AddWithValue("@MaCTDT", maChiTietDangTuyen);
-                    cmd.Parameters.AddWithValue("@Vitri", newViTri);
-                    cmd.Parameters.AddWithValue("@SoLuong", newSoLuong);
-                    cmd.Parameters.AddWithValue("@MoTa", newMoTa);
-                    cmd.Parameters.AddWithValue("@MaDT", maDangTuyen);
-                    cmd.ExecuteNonQuery();
+                    using (SqlCommand cmd = new SqlCommand(sql4, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@MaDT", maDangTuyen2);
+                        cmd.Parameters.AddWithValue("@ThoiGian", newThoiGianDangTuyen);
+                        cmd.Parameters.AddWithValue("@type", type);
+                        cmd.Parameters.AddWithValue("@employ", employ);
+                        cmd.Parameters.AddWithValue("@company", companyId);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand(sql1, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@MaCTDT", maChiTietDangTuyen);
+                        cmd.Parameters.AddWithValue("@Vitri", newViTri);
+                        cmd.Parameters.AddWithValue("@SoLuong", newSoLuong);
+                        cmd.Parameters.AddWithValue("@MoTa", newMoTa);
+                        cmd.Parameters.AddWithValue("@MaDT", maDangTuyen2);
+                        cmd.ExecuteNonQuery();
+                    }
+
                 }
+                else
+                {
+                    using (SqlCommand cmd = new SqlCommand(sql1, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@MaCTDT", maChiTietDangTuyen);
+                        cmd.Parameters.AddWithValue("@Vitri", newViTri);
+                        cmd.Parameters.AddWithValue("@SoLuong", newSoLuong);
+                        cmd.Parameters.AddWithValue("@MoTa", newMoTa);
+                        cmd.Parameters.AddWithValue("@MaDT", maDangTuyen);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                
             }
             catch (Exception ex)
             {

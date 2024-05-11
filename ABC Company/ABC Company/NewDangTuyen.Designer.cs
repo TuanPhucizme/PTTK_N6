@@ -40,6 +40,10 @@
             label2 = new Label();
             label1 = new Label();
             UploadDate = new DateTimePicker();
+            label5 = new Label();
+            type = new TextBox();
+            label7 = new Label();
+            employ = new TextBox();
             SuspendLayout();
             // 
             // companyCode
@@ -145,11 +149,47 @@
             UploadDate.Size = new Size(121, 27);
             UploadDate.TabIndex = 5;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(503, 93);
+            label5.Name = "label5";
+            label5.Size = new Size(72, 20);
+            label5.TabIndex = 43;
+            label5.Text = "Hinh thuc";
+            // 
+            // type
+            // 
+            type.Location = new Point(592, 90);
+            type.Name = "type";
+            type.Size = new Size(125, 27);
+            type.TabIndex = 44;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(503, 136);
+            label7.Name = "label7";
+            label7.Size = new Size(75, 20);
+            label7.TabIndex = 45;
+            label7.Text = "Nhan vien";
+            // 
+            // employ
+            // 
+            employ.Location = new Point(592, 136);
+            employ.Name = "employ";
+            employ.Size = new Size(125, 27);
+            employ.TabIndex = 46;
+            // 
             // NewDangTuyen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(employ);
+            Controls.Add(label7);
+            Controls.Add(type);
+            Controls.Add(label5);
             Controls.Add(UploadDate);
             Controls.Add(companyCode);
             Controls.Add(label6);
@@ -183,5 +223,9 @@
         private Label label2;
         private Label label1;
         private DateTimePicker UploadDate;
+        private Label label5;
+        private TextBox type;
+        private Label label7;
+        private TextBox employ;
     }
 }
