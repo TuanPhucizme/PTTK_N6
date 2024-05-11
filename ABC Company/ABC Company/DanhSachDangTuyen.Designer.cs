@@ -77,7 +77,7 @@ namespace WinFormsApp1
             DVData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             DVData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DVData.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            DVData.BackgroundColor = SystemColors.ControlDarkDark;
+            DVData.BackgroundColor = SystemColors.Control;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = SystemColors.Control;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -95,7 +95,8 @@ namespace WinFormsApp1
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             DVData.DefaultCellStyle = dataGridViewCellStyle3;
-            DVData.Location = new Point(173, 96);
+            DVData.Dock = DockStyle.Bottom;
+            DVData.Location = new Point(0, 98);
             DVData.Name = "DVData";
             DVData.ReadOnly = true;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -109,7 +110,7 @@ namespace WinFormsApp1
             DVData.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             DVData.RowTemplate.Height = 29;
             DVData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DVData.Size = new Size(536, 296);
+            DVData.Size = new Size(851, 296);
             DVData.TabIndex = 0;
             DVData.CellDoubleClick += DVData_CellDoubleClick;
             // 

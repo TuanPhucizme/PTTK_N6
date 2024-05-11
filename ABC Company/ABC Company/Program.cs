@@ -1,3 +1,4 @@
+using PROJECT_ADIS;
 using WinFormsApp1;
 
 namespace ABC_Company
@@ -13,7 +14,7 @@ namespace ABC_Company
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new DangTuyen());
+            Application.Run(new Man_Hinh_Quan_Li());
         }
     }
 }
